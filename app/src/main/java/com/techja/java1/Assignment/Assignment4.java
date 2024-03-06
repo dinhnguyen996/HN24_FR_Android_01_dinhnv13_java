@@ -8,7 +8,7 @@ public class Assignment4 {
         int month;
         System.out.println("Nhập vào tháng bất kỳ");
         month=scanner.nextInt();
-        if (month<4){
+        if (0<month && month<4){
             System.out.println("Tháng"+ month + "thuộc quý 1");
         } else if (4<=month && month<=6) {
             System.out.println("Tháng"+ month + "thuộc quý 2");
