@@ -2,6 +2,7 @@ package com.techja.java1.Assignment4.exp3;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Manager {
@@ -42,24 +43,34 @@ public class Manager {
 
     private static void findStaff(Scanner scanner, Map<String, Staff> managerHashmap) {
         System.out.println("Nhập id hoặc tên nhân viên cần tìm kiếm");
-        String findStaff=scanner.nextLine().toLowerCase();
+        String findStaff=scanner.nextLine();
 
-        for (Staff staffFind:managerHashmap.values()){
-            if (staffFind.getName().equals(findStaff)){
-                System.out.println("Nhân viên tìm được bằng tên la: ");
-              staffDisplay(staffFind);
+        if (managerHashmap.containsKey(findStaff)) {
+            // Nếu findStaff là id, hiển thị thông tin nhân viên tương ứng
+            System.out.println("Nhân viên tìm theo id là:");
+            staffDisplay(Objects.requireNonNull(managerHashmap.get(findStaff)));
+        } else {
+            // Nếu không phải id, kiểm tra xem có nhân viên nào trùng tên không
+            boolean foundByName = false;
+            for (Staff staffFind : managerHashmap.values()) {
+                if (staffFind.getName().equals(findStaff)) {
+                    System.out.println("Nhân viên tìm theo tên là:");
+                    staffDisplay(staffFind);
+                    foundByName = true;
+                }
             }
-        }
-        if (findStaff.equals(managerHashmap.get(findStaff))){
-            System.out.println("Nhân viên tìm bang id la: " );
-            staffDisplay(managerHashmap.get(findStaff));
+
+            // Nếu không tìm thấy
+            if (!foundByName) {
+                System.out.println("Không tìm thấy nhân viên với thông tin: " + findStaff);
+            }
         }
     }
 
     private static void updataStaff(Scanner scanner, Map<String, Staff> managerHashmap) {
         System.out.println("Nhập id nhân viên cần update");
         String inputId=scanner.nextLine();
-        if (inputId.equals(managerHashmap.get(inputId))){
+        if (managerHashmap.containsKey(inputId)){
            //cập nhật lại nhân viên
             Staff staffUpdate=managerHashmap.get(inputId);
 
