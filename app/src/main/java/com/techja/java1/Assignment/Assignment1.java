@@ -8,7 +8,7 @@ public class Assignment1 {
         Scanner scanner=new Scanner(System.in);
         System.out.println("nhập vào 1 số bất kỳ");
         number=scanner.nextInt();
-        if (number<5){
+        if (0<=number && number<5){
             System.out.println("Rớt");
         } else if (number >=5 && number<=10) {
             System.out.println("Đậu");
